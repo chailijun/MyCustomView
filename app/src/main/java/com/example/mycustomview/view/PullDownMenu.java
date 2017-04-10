@@ -26,6 +26,7 @@ import java.util.List;
 
 /**
  * Created by PVer on 2017/4/10.
+ * 带下拉选择的popuWindow
  */
 
 public class PullDownMenu extends LinearLayout {
