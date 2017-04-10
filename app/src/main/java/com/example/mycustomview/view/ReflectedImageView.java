@@ -13,6 +13,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,10 +30,13 @@ import com.example.mycustomview.R;
 
 public class ReflectedImageView extends LinearLayout {
 
-    private final Bitmap originalImage;
+    private static final float DEFAULT_TEXT_SIZE = 12.0f;
+    private Bitmap originalImage;
     private String myText;
+    private int textColor;
+    private float textSize;
 
-    private final int resourceId;
+    private int resourceId = -1;
 
     private View rootView = null;
 
@@ -49,19 +54,36 @@ public class ReflectedImageView extends LinearLayout {
     public ReflectedImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ReflectedImageView2);
-        resourceId = ta.getResourceId(R.styleable.ReflectedImageView2_background2, R.drawable.test);
-        myText = ta.getString(R.styleable.ReflectedImageView2_mytext);
+        init(context, attrs);
+
+        if (resourceId != -1) {
+            originalImage = BitmapFactory.decodeResource(context.getResources(), resourceId);
+
+            rootView = View.inflate(getContext(), R.layout.reflectedimageview_layout, this);
+            textView = (TextView) rootView.findViewById(R.id.textview);
+            imageView = (ImageView) rootView.findViewById(R.id.reflectionImage);
+
+            textView.setBackgroundResource(resourceId);
+            textView.setText(myText);
+            textView.setTextColor(textColor);
+            textView.setTextSize(textSize);
+            setReflectedImage(imageView);
+        }
+    }
+
+    private void init(Context context, @Nullable AttributeSet attrs) {
+
+        // 将SP单位默认值转为PX
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        textSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
+                DEFAULT_TEXT_SIZE, displayMetrics);
+
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ReflectedImageView);
+        resourceId = ta.getResourceId(R.styleable.ReflectedImageView_background, -1);
+        myText = ta.getString(R.styleable.ReflectedImageView_text);
+        textColor = ta.getColor(R.styleable.ReflectedImageView_textColor, 0x000000);
+        textSize = ta.getDimension(R.styleable.ReflectedImageView_textSize, textSize);
         ta.recycle();
-        originalImage = BitmapFactory.decodeResource(context.getResources(), resourceId);
-
-        rootView = View.inflate(getContext(), R.layout.reflectedimageview_layout, this);
-        textView = (TextView) rootView.findViewById(R.id.textview);
-        imageView = (ImageView) rootView.findViewById(R.id.reflectionImage);
-
-        textView.setBackgroundResource(resourceId);
-        textView.setText(myText);
-        setReflectedImage(imageView);
     }
 
     private void setReflectedImage(ImageView imageView) {

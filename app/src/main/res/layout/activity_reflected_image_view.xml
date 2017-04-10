@@ -7,9 +7,10 @@
     tools:context="com.example.mycustomview.ReflectedImageViewActivity">
 
     <com.example.mycustomview.view.ReflectedImageView
-        app:mytext="测试"
-        app:background2="@drawable/test"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        app:background="@drawable/test"
+        app:text="测试"
+        app:textColor="#ff0000"
+        app:textSize="12sp" />
 </android.support.constraint.ConstraintLayout>
