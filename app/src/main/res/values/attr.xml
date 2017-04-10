@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ReflectedImageView2">
+        <attr name="background2" format="reference"/>
+        <attr name="mytext" format="string"/>
+    </declare-styleable>
+</resources>
