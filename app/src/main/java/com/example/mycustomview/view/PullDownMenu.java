@@ -54,7 +54,7 @@ public class PullDownMenu extends LinearLayout {
 
     private View viewList;
 
-    private SimpleAdapter simpleAdapter;
+//    private SimpleAdapter simpleAdapter;
 
     private MyAdapter adapter;
 
@@ -75,7 +75,8 @@ public class PullDownMenu extends LinearLayout {
 
     private void init(final Context context) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.pull_down_menu_layout, null);
-        addView(view, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        addView(view, new LinearLayout.LayoutParams(
+                LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         tvPullDown = (TextView) findViewById(R.id.tvPullDown);
 
         //设置向下箭头
@@ -93,8 +94,8 @@ public class PullDownMenu extends LinearLayout {
                 } else {
                     viewList = LayoutInflater.from(getContext()).inflate(R.layout.pop_menulist, null);
                     listView = (ListView) viewList.findViewById(R.id.menulist);
-                    simpleAdapter = new SimpleAdapter(getContext(), hashMaps, R.layout.pop_menuitem,
-                            new String[]{"item"}, new int[]{R.id.menuitem});
+//                    simpleAdapter = new SimpleAdapter(getContext(), hashMaps, R.layout.pop_menuitem,
+//                            new String[]{"item"}, new int[]{R.id.menuitem});
                     adapter = new MyAdapter();
 
 //                    listView.setAdapter(simpleAdapter);
