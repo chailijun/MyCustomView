@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private List<String> datas;
 
     private String[] allItem = {"带倒影的ImageView",
-            "带下拉选择的popuWindow"};
+            "带下拉选择的popuWindow",
+    "ViewPager切换动画"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1://带下拉选择的popuWindow
                         startActivity(new Intent(MainActivity.this,PullDownMenuActivity.class));
+                        break;
+                    case 2://ViewPager切换动画
+                        startActivity(new Intent(MainActivity.this,JazzyViewPagerActivity.class));
                         break;
                     default:
                         break;

@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReflectedImageViewActivity" />
-        <activity android:name=".PullDownMenuActivity"></activity>
+        <activity android:name=".PullDownMenuActivity" />
+        <activity android:name=".JazzyViewPagerActivity"></activity>
     </application>
 
 </manifest>
