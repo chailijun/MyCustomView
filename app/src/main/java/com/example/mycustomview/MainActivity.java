@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String[] allItem = {"带倒影的ImageView",
             "带下拉选择的popuWindow",
-    "ViewPager切换动画"};
+    "ViewPager切换动画",
+    "带旋转指针的switchButton"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2://ViewPager切换动画
                         startActivity(new Intent(MainActivity.this,JazzyViewPagerActivity.class));
+                        break;
+                    case 3://带旋转指针的switchButton
+                        startActivity(new Intent(MainActivity.this,RotateSwitchButtonActivity.class));
                         break;
                     default:
                         break;

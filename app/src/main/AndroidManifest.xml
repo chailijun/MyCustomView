@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".ReflectedImageViewActivity" />
         <activity android:name=".PullDownMenuActivity" />
-        <activity android:name=".JazzyViewPagerActivity"></activity>
+        <activity android:name=".JazzyViewPagerActivity" />
+        <activity android:name=".RotateSwitchButtonActivity"></activity>
     </application>
 
 </manifest>
