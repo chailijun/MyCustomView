@@ -1,5 +1,6 @@
 package com.example.mycustomview;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] allItem = {"带倒影的ImageView",
             "带下拉选择的popuWindow",
     "ViewPager切换动画",
-    "带旋转指针的switchButton"};
+    "带旋转指针的switchButton",
+    "TextView中数字带动画"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3://带旋转指针的switchButton
                         startActivity(new Intent(MainActivity.this,RotateSwitchButtonActivity.class));
+                        break;
+                    case 4://TextView中数字带动画
+                        startActivity(new Intent(MainActivity.this,NumberAnimTextViewActivity.class));
                         break;
                     default:
                         break;
