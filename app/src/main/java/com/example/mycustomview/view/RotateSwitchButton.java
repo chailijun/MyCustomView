@@ -1,9 +1,10 @@
 package com.example.mycustomview.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,25 +12,28 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.mycustomview.R;
 
-import static android.R.attr.animation;
-import static android.R.attr.duration;
-import static android.R.attr.level;
-
-/**
- * Created by PVer on 2017/4/13.
- */
 
 public class RotateSwitchButton extends LinearLayout implements View.OnClickListener {
 
     private static final long DURATION = 500;
-    private ImageView leftView;
+    private static final int ON = 1;
+    private static final int OFF = 0;
+
+    private String textLeft;
+    private String textRight;
+    private String textCenter;
+
+    private TextView leftView;
     private ImageView centerView;
-    private ImageView rightView;
+    private TextView rightView;
+    private TextView tv_center;
 
     private SelectListener listener;
+    private Context mContext;
 
     public RotateSwitchButton(Context context) {
         this(context,null);
@@ -42,39 +46,54 @@ public class RotateSwitchButton extends LinearLayout implements View.OnClickList
     public RotateSwitchButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        init(context);
+        init(context,attrs);
     }
 
-    private void init(Context context) {
+    private void init(Context context, @Nullable AttributeSet attrs) {
+
+        mContext = context;
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.RotateSwitchButton);
+        textLeft = ta.getString(R.styleable.RotateSwitchButton_text_left);
+        textRight = ta.getString(R.styleable.RotateSwitchButton_text_right);
+        textCenter = ta.getString(R.styleable.RotateSwitchButton_text_center);
+        ta.recycle();
+
         View view = LayoutInflater.from(getContext()).inflate(R.layout.rotate_switch_button_layout, null);
         addView(view, new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
-        leftView = (ImageView) view.findViewById(R.id.left_view);
+        leftView = (TextView) view.findViewById(R.id.left_view);
         centerView = (ImageView) view.findViewById(R.id.center_view);
-        rightView = (ImageView) view.findViewById(R.id.right_view);
+        rightView = (TextView) view.findViewById(R.id.right_view);
+        tv_center = (TextView) view.findViewById(R.id.tv_center);
+
+        leftView.setText(textLeft);
+        rightView.setText(textRight);
+        tv_center.setText(textCenter);
 
         leftView.setOnClickListener(this);
         centerView.setOnClickListener(this);
         rightView.setOnClickListener(this);
 
         //设置默认状态
-        leftView.getDrawable().setLevel(1);
-        rightView.getDrawable().setLevel(0);
+        leftViewOn();
+        rightViewOff();
     }
 
     @Override
     public void onClick(View view) {
-        int leftLevel = leftView.getDrawable().getLevel();
-        int rightLevel = rightView.getDrawable().getLevel();
+
+        Integer left = (Integer) leftView.getTag();
+        Integer right = (Integer) rightView.getTag();
 
         switch (view.getId()){
             case R.id.left_view:
-                if (leftLevel == 0){
+                if (left == OFF){
                     rightTurnLeftRotateAnimation();
-                    leftView.getDrawable().setLevel(1);
-                    if (rightLevel == 1){
-                        rightView.getDrawable().setLevel(0);
+                    leftViewOn();
+
+                    if (right == ON){
+                        rightViewOff();
                     }
 
                     if (listener != null){
@@ -89,12 +108,12 @@ public class RotateSwitchButton extends LinearLayout implements View.OnClickList
                 }
                 break;
             case R.id.right_view:
-                if (rightLevel == 0){
+                if (right == OFF){
                     leftTurnRightRotateAnimation();
-                    rightView.getDrawable().setLevel(1);
+                    rightViewON();
 
-                    if (leftLevel == 1){
-                        leftView.getDrawable().setLevel(0);
+                    if (left == ON){
+                        leftViewOff();
                     }
 
                     if (listener != null){
@@ -108,6 +127,42 @@ public class RotateSwitchButton extends LinearLayout implements View.OnClickList
         }
     }
 
+    private void rightViewON() {
+        if (rightView == null){
+            return;
+        }
+        rightView.setBackgroundResource(R.drawable.right_on);
+        rightView.setTag(ON);
+        rightView.setTextColor(ContextCompat.getColor(mContext,R.color.on_text_color));
+    }
+
+    private void rightViewOff() {
+        if (rightView == null){
+            return;
+        }
+        rightView.setBackgroundResource(R.drawable.right_off);
+        rightView.setTag(OFF);
+        rightView.setTextColor(ContextCompat.getColor(mContext,R.color.white_text_color));
+    }
+
+    private void leftViewOn() {
+        if (leftView == null){
+            return;
+        }
+        leftView.setBackgroundResource(R.drawable.left_on);
+        leftView.setTag(ON);
+        leftView.setTextColor(ContextCompat.getColor(mContext,R.color.on_text_color));
+    }
+
+    private void leftViewOff() {
+        if (leftView == null){
+            return;
+        }
+        leftView.setBackgroundResource(R.drawable.left_off);
+        leftView.setTag(OFF);
+        leftView.setTextColor(ContextCompat.getColor(mContext,R.color.white_text_color));
+    }
+
     /**
      * 从左向右旋转
      */
@@ -116,7 +171,7 @@ public class RotateSwitchButton extends LinearLayout implements View.OnClickList
             return;
         }
         RotateAnimation animation = new RotateAnimation(0f,180f,
-                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF,0.5f);
         animation.setDuration(DURATION);
 //        animation.setRepeatCount(1);
         animation.setFillAfter(true);
@@ -132,7 +187,7 @@ public class RotateSwitchButton extends LinearLayout implements View.OnClickList
             return;
         }
         RotateAnimation animation = new RotateAnimation(180f,0f,
-                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF,0.5f);
         animation.setDuration(DURATION);
 //        animation.setRepeatCount(1);
         animation.setFillAfter(true);
