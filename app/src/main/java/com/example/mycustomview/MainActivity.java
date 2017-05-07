@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
             "带下拉选择的popuWindow",
     "ViewPager切换动画",
     "带旋转指针的switchButton",
-    "TextView中数字带动画"};
+    "TextView中数字带动画",
+    "可订制的下拉选择框"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 4://TextView中数字带动画
                         startActivity(new Intent(MainActivity.this,NumberAnimTextViewActivity.class));
+                        break;
+                    case 5://可订制的下拉选择框，可设置一列选择条件或多列选择条件
+                        startActivity(new Intent(MainActivity.this,PullDownMenuActivity2.class));
                         break;
                     default:
                         break;
