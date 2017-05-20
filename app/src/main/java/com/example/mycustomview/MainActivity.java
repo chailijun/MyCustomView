@@ -1,22 +1,17 @@
 package com.example.mycustomview;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
     "ViewPager切换动画",
     "带旋转指针的switchButton",
     "TextView中数字带动画",
-    "可订制的下拉选择框"};
+    "可订制的下拉选择框",
+    "自定义样式Dialog",
+    "点击Button回弹效果",
+    "TestActivity",
+            "结尾带删除图标的TextView"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 5://可订制的下拉选择框，可设置一列选择条件或多列选择条件
                         startActivity(new Intent(MainActivity.this,PullDownMenuActivity2.class));
+                        break;
+                    case 6://自定义样式Dialog
+                        startActivity(new Intent(MainActivity.this,CLJDialogActivity.class));
+                        break;
+                    case 7://点击Button回弹效果
+                        startActivity(new Intent(MainActivity.this,SpringbackButtonActivity.class));
+                        break;
+                    case 8://TestActivity
+                        startActivity(new Intent(MainActivity.this,TestActivity.class));
+                        break;
+                    case 9://结尾带删除图标的TextView
+                        startActivity(new Intent(MainActivity.this,ClearableTextViewActivity.class));
                         break;
                     default:
                         break;

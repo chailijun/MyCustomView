@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <TextView
+        android:gravity="bottom"
+        android:id="@+id/tv_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="_ _ _ _ _ _ "
+        android:textSize="27sp" />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_input"
+        android:layout_toRightOf="@id/tv_input"
+        android:paddingBottom="4dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/alphabet_delete" />
+
+    <TextView
+        android:id="@+id/tv_keyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_input"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="hello"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <!--
+        <View
+            android:layout_below="@id/tv_keyword"
+            android:background="@color/bg_bookshelf_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>-->
+
+</RelativeLayout>

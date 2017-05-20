@@ -21,7 +21,11 @@
         <activity android:name=".PullDownMenuActivity2" />
         <activity android:name=".JazzyViewPagerActivity" />
         <activity android:name=".RotateSwitchButtonActivity" />
-        <activity android:name=".NumberAnimTextViewActivity"></activity>
+        <activity android:name=".NumberAnimTextViewActivity" />
+        <activity android:name=".CLJDialogActivity" />
+        <activity android:name=".SpringbackButtonActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".ClearableTextViewActivity"></activity>
     </application>
 
 </manifest>
